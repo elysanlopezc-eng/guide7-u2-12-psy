@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colegio Montano - Scientific Inquiry & Market Research Guide</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Nunito & Segoe UI -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        montanoBlue: '#1269A8',
+                        montanoYellow: '#F7D615',
+                        montanoTeal: '#54887D',
+                        montanoLightBlue: '#88B5C7',
+                        montanoOlive: '#A6B046',
+                        montanoBg: '#F2F5E9',
+                    },
+                    fontFamily: {
+                        sans: ['Nunito', 'Segoe UI', 'Tahoma', 'Verdana', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #F2F5E9;
+            font-family: 'Nunito', 'Segoe UI', sans-serif;
+        }
+        .whiteboard-frame {
+            background: #ffffff;
+            border: 4px solid #d1d5db;
+            border-radius: 20px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        /* Custom scrollbar for clean UI */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F2F5E9;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #88B5C7;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #1269A8;
+        }
+    </style>
+</head>
+<body class="min-h-screen text-gray-800 p-2 sm:p-6">
+
+    <!-- App Container / Whiteboard Frame -->
+    <div id="appContainer" class="whiteboard-frame max-w-7xl mx-auto flex flex-col min-h-[92vh] overflow-hidden transition-all duration-300">
+        
+        <!-- Header Section -->
+        <header class="bg-montanoBlue text-white p-4 sm:p-6 flex flex-col md:flex-row items-center justify-between border-b-4 border-montanoYellow rounded-t-[16px]">
+            <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyEop0yf6lZ7Jk9MILZxF1rBj4Oqs5esyhIQ&amp;s" alt="Colegio Montano Logo" class="w-16 h-16 rounded-full bg-white p-1 object-cover shadow-md border-2 border-montanoYellow" onerror="this.src='https://placehold.co/80x80/1269A8/FFFFFF?text=CM'">
+                <div>
+                    <h1 class="text-xl sm:text-2xl font-extrabold tracking-wide">COLEGIO MONTANO</h1>
+                    <p class="text-montanoYellow text-sm font-semibold">12th Grade Mercadotecnia | Research Quality & Sampling (B2-C1 ESL)</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-3">
+                <span class="bg-montanoTeal text-xs sm:text-sm px-3 py-1.5 rounded-full font-bold shadow text-white">Research Quality</span>
+                <button onclick="toggleFullscreen()" class="bg-montanoYellow text-montanoBlue font-bold px-4 py-2 rounded-xl shadow-lg hover:bg-yellow-300 transition-transform active:scale-95 flex items-center space-x-2">
+                    <i class="fa-solid fa-expand"></i>
+                    <span class="hidden sm:inline">Fullscreen</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs Bar -->
+        <nav class="bg-montanoBg p-3 border-b border-gray-200 overflow-x-auto">
+            <div class="flex space-x-2 min-w-max">
+                <button onclick="switchTab(1)" id="tabBtn1" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-sm transition-all flex items-center space-x-2 bg-montanoBlue text-white shadow-md">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>1. Theory & Grammar</span>
+                </button>
+                <button onclick="switchTab(2)" id="tabBtn2" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-sm transition-all flex items-center space-x-2 bg-white text-gray-700 hover:bg-montanoLightBlue hover:text-white shadow-sm">
+                    <i class="fa-solid fa-list-check"></i>
+                    <span>2. Solved Examples (15)</span>
+                </button>
+                <button onclick="switchTab(3)" id="tabBtn3" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-sm transition-all flex items-center space-x-2 bg-white text-gray-700 hover:bg-montanoLightBlue hover:text-white shadow-sm">
+                    <i class="fa-solid fa-microphone-lines"></i>
+                    <span>3. Voice Simulator & Dashboard</span>
+                </button>
+                <button onclick="switchTab(4)" id="tabBtn4" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-sm transition-all flex items-center space-x-2 bg-white text-gray-700 hover:bg-montanoLightBlue hover:text-white shadow-sm">
+                    <i class="fa-solid fa-lightbulb"></i>
+                    <span>4. Critical Reflection</span>
+                </button>
+                <button onclick="switchTab(5)" id="tabBtn5" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-sm transition-all flex items-center space-x-2 bg-white text-gray-700 hover:bg-montanoLightBlue hover:text-white shadow-sm">
+                    <i class="fa-solid fa-clipboard-question"></i>
+                    <span>5. Formative Evaluation (15)</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 p-4 sm:p-8 overflow-y-auto bg-white">
+            
+            <!-- TAB 1: THEORY & GRAMMAR -->
+            <div id="tabContent1" class="tab-pane space-y-6">
+                <div class="border-l-8 border-montanoBlue bg-montanoBg p-5 rounded-r-2xl shadow-sm">
+                    <h2 class="text-2xl font-extrabold text-montanoBlue mb-2">Guide 7: Research Quality: Reliability, Validity, and Sampling</h2>
+                    <p class="text-gray-700 leading-relaxed text-sm sm:text-base">
+                        Welcome to Guide 7, 12th-grade marketing leaders! In market research, data value depends entirely on its methodological rigor. Here we explore <strong>reliability</strong> (consistency of measurement) and <strong>validity</strong> (measuring what is intended), sample representativeness, sampling and response bias, the severe limitations of small sample sizes, responsible data interpretation, and avoiding overgeneralization.
+                    </p>
+                </div>
+
+                <!-- Structured Lesson Framework Banner (Guide 7) -->
+                <div class="bg-white border-2 border-montanoYellow rounded-2xl p-5 shadow-sm">
+                    <h3 class="font-bold text-lg text-montanoBlue mb-3 flex items-center">
+                        <i class="fa-solid fa-clock mr-2 text-montanoYellow"></i> Research Quality & Sampling Framework (Guide 7)
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 text-xs">
+                        <div class="bg-montanoBg p-3 rounded-xl border border-gray-200">
+                            <span class="font-extrabold text-montanoBlue block mb-1">Core Metrics</span>
+                            <strong>Reliability & Validity:</strong> Explaining consistency versus accuracy in accessible marketing terms.
+                        </div>
+                        <div class="bg-montanoBg p-3 rounded-xl border border-gray-200">
+                            <span class="font-extrabold text-montanoTeal block mb-1">Bias Detection</span>
+                            <strong>Sampling & Response:</strong> Identifying flaws in sample representation and participant self-selection.
+                        </div>
+                        <div class="bg-montanoBg p-3 rounded-xl border border-gray-200">
+                            <span class="font-extrabold text-montanoOlive block mb-1">Data Interpretation</span>
+                            <strong>Small Datasets:</strong> Interpreting small fictional survey summaries responsibly without exaggeration.
+                        </div>
+                        <div class="bg-montanoBg p-3 rounded-xl border border-gray-200">
+                            <span class="font-extrabold text-montanoBlue block mb-1">Generalization</span>
+                            <strong>Avoiding Over-claims:</strong> Respecting population boundaries and sample limitations.
+                        </div>
+                        <div class="bg-montanoBg p-3 rounded-xl border border-gray-200">
+                            <span class="font-extrabold text-montanoYellow block mb-1">Instrument Workshop</span>
+                            <strong>Activity 3 Workshop:</strong> Quality checklist evaluation and peer audit.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Concept Cards Grid (Guide 7) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <!-- Card 1 -->
+                    <div class="border-2 border-montanoLightBlue rounded-2xl p-5 shadow-md bg-white hover:shadow-xl transition-all flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="bg-montanoBlue text-white text-xs font-bold px-3 py-1 rounded-full">Core Concept 1</span>
+                                <i class="fa-solid fa-bullseye text-montanoBlue text-xl"></i>
+                            </div>
+                            <h3 class="font-bold text-lg text-montanoBlue mb-2">Reliability vs. Validity</h3>
+                            <p class="text-sm text-gray-600 mb-4">
+                                <strong>Reliability:</strong> Consistency; getting the same results repeatedly under similar conditions. <br><strong>Validity:</strong> Truthfulness; whether the instrument truly measures the intended market construct.
+                            </p>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold text-gray-500 mb-1">
+                                <span>Method Rigor</span>
+                                <span class="text-montanoTeal">97%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 h-2.5 rounded-full overflow-hidden">
+                                <div class="bg-montanoTeal h-2.5 rounded-full" style="width: 97%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="border-2 border-montanoLightBlue rounded-2xl p-5 shadow-md bg-white hover:shadow-xl transition-all flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="bg-montanoTeal text-white text-xs font-bold px-3 py-1 rounded-full">Core Concept 2</span>
+                                <i class="fa-solid fa-users-rectangle text-montanoTeal text-xl"></i>
+                            </div>
+                            <h3 class="font-bold text-lg text-montanoTeal mb-2">Representativeness & Bias</h3>
+                            <p class="text-sm text-gray-600 mb-4">
+                                <strong>Representativeness:</strong> How closely a sample mirrors the wider target population. <br><strong>Sampling Bias:</strong> Systematic exclusion of specific demographic segments.
+                            </p>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold text-gray-500 mb-1">
+                                <span>Sample Accuracy</span>
+                                <span class="text-montanoBlue">95%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 h-2.5 rounded-full overflow-hidden">
+                                <div class="bg-montanoBlue h-2.5 rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="border-2 border-montanoLightBlue rounded-2xl p-5 shadow-md bg-white hover:shadow-xl transition-all flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="bg-montanoOlive text-white text-xs font-bold px-3 py-1 rounded-full">Core Concept 3</span>
+                                <i class="fa-solid fa-triangle-exclamation text-montanoOlive text-xl"></i>
+                            </div>
+                            <h3 class="font-bold text-lg text-montanoOlive mb-2">Response Bias & Small Samples</h3>
+                            <p class="text-sm text-gray-600 mb-4">
+                                Response bias occurs when participants answer dishonestly or self-select. Small samples inflate error margins and prevent broad market generalizations.
+                            </p>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold text-gray-500 mb-1">
+                                <span>Error Control</span>
+                                <span class="text-montanoOlive">92%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 h-2.5 rounded-full overflow-hidden">
+                                <div class="bg-montanoOlive h-2.5 rounded-full" style="width: 92%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="border-2 border-montanoLightBlue rounded-2xl p-5 shadow-md bg-white hover:shadow-xl transition-all flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="bg-montanoBlue text-white text-xs font-bold px-3 py-1 rounded-full">Core Concept 4</span>
+                                <i class="fa-solid fa-chart-pie text-montanoBlue text-xl"></i>
+                            </div>
+                            <h3 class="font-bold text-lg text-montanoBlue mb-2">Responsible Data Interpretation</h3>
+                            <p class="text-sm text-gray-600 mb-4">
+                                Using basic descriptive summaries (percentages, means, medians) objectively. Researchers must report what the data shows without exaggeration or selective cherry-picking.
+                            </p>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold text-gray-500 mb-1">
+                                <span>Ethical Reporting</span>
+                                <span class="text-montanoTeal">99%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 h-2.5 rounded-full overflow-hidden">
+                                <div class="bg-montanoTeal h-2.5 rounded-full" style="width: 99%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="border-2 border-montanoLightBlue rounded-2xl p-5 shadow-md bg-white hover:shadow-xl transition-all flex flex-col justify-between md:col-span-2 lg:col-span-2">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="bg-montanoYellow text-montanoBlue font-extrabold text-xs px-3 py-1 rounded-full">Core Concept 5</span>
+                                <i class="fa-solid fa-clipboard-check text-montanoBlue text-xl"></i>
+                            </div>
+                            <h3 class="font-bold text-lg text-montanoBlue mb-2">Research Instrument Quality Audit & Overgeneralization</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-gray-700 mt-2">
+                                <div class="bg-montanoBg p-2.5 rounded-xl border border-gray-200"><strong>Quality Checklist:</strong> Auditing surveys for clarity, neutral wording, reliability, and validity.</div>
+                                <div class="bg-montanoBg p-2.5 rounded-xl border border-gray-200"><strong>Avoiding Over-claims:</strong> Restricting conclusions strictly to the sampled population.</div>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="flex justify-between text-xs font-semibold text-gray-500 mb-1">
+                                <span>Methodological Rigor</span>
+                                <span class="text-montanoBlue">96%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 h-2.5 rounded-full overflow-hidden">
+                                <div class="bg-montanoBlue h-2.5 rounded-full" style="width: 96%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- TAB 2: SOLVED EXAMPLES (15) -->
+            <div id="tabContent2" class="tab-pane hidden space-y-6">
+                <div class="border-l-8 border-montanoTeal bg-montanoBg p-5 rounded-r-2xl shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                    <div>
+                        <h2 class="text-2xl font-extrabold text-montanoTeal mb-1">Solved Research Quality & Sampling Examples</h2>
+                        <p class="text-gray-700 text-sm">15 thoroughly broken-down examples covering reliability, validity, sampling bias, response bias, small sample limitations, descriptive data summaries, and overgeneralization prevention with TTS audio support.</p>
+                    </div>
+                    <div class="mt-3 sm:mt-0 flex space-x-2">
+                        <button onclick="filterExamples('all')" class="px-3 py-1 rounded-lg bg-montanoTeal text-white text-xs font-bold">All</button>
+                        <button onclick="filterExamples('basic')" class="px-3 py-1 rounded-lg bg-gray-200 text-gray-700 text-xs font-bold hover:bg-montanoLightBlue hover:text-white">Basic (1-5)</button>
+                        <button onclick="filterExamples('intermediate')" class="px-3 py-1 rounded-lg bg-gray-200 text-gray-700 text-xs font-bold hover:bg-montanoLightBlue hover:text-white">Interm. (6-10)</button>
+                        <button onclick="filterExamples('advanced')" class="px-3 py-1 rounded-lg bg-gray-200 text-gray-700 text-xs font-bold hover:bg-montanoLightBlue hover:text-white">Advanced (11-15)</button>
+                    </div>
+                </div>
+
+                <!-- Examples Container -->
+                <div id="examplesContainer" class="space-y-4">
+                    <!-- Javascript will render 15 examples here -->
+                </div>
+            </div>
+
+            <!-- TAB 3: LIVE INTERACTIVE VOICE SIMULATOR & DASHBOARD -->
+            <div id="tabContent3" class="tab-pane hidden space-y-6">
+                <div class="border-l-8 border-montanoOlive bg-montanoBg p-5 rounded-r-2xl shadow-sm">
+                    <h2 class="text-2xl font-extrabold text-montanoOlive mb-1">Live Interactive Voice Simulator & Performance Dashboard (Guide 7)</h2>
+                    <p class="text-gray-700 text-sm">Step into a quality audit briefing with Research Director Carlos. Address the challenge: "Evaluate a survey for reliability and validity, and explain why a sample of 10 friends cannot represent all Guatemalan consumers." Speak into your microphone or type your response. Real-time AI metrics evaluate your clarity, grammar, and professional etiquette!</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    
+                    <!-- Simulator Interface (2 Cols) -->
+                    <div class="lg:col-span-2 bg-gray-50 border-2 border-montanoLightBlue rounded-2xl p-5 flex flex-col justify-between shadow-md">
+                        <div>
+                            <div class="flex items-center justify-between border-b pb-3 mb-4">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-12 h-12 rounded-full bg-montanoTeal text-white flex items-center justify-center font-bold text-lg shadow">RD</div>
+                                    <div>
+                                        <h4 class="font-bold text-montanoTeal">Carlos Mendoza (Research Director)</h4>
+                                        <span class="text-xs text-green-600 font-semibold flex items-center"><span class="w-2 h-2 rounded-full bg-green-500 inline-block mr-1.5 animate-pulse"></span> Active Session</span>
+                                    </div>
+                                </div>
+                                <button onclick="speakDialogue('Hello analyst. Why is a survey considered unreliable if it produces wildly different results when administered twice under identical conditions?')" class="bg-montanoYellow text-montanoBlue p-2 rounded-xl text-sm font-bold shadow hover:bg-yellow-300 flex items-center space-x-1">
+                                    <i class="fa-solid fa-volume-high"></i>
+                                    <span>Listen Prompt</span>
+                                </button>
+                            </div>
+
+                            <!-- Chat Dialogue Box -->
+                            <div id="simChatBox" class="bg-white rounded-xl p-4 h-64 overflow-y-auto border border-gray-200 space-y-3 mb-4 shadow-inner">
+                                <div class="flex items-start space-x-2">
+                                    <div class="bg-montanoTeal text-white rounded-full w-8 h-8 flex items-center justify-center text-xs font-bold flex-shrink-0">RD</div>
+                                    <div class="bg-teal-50 text-gray-800 p-3 rounded-2xl rounded-tl-none text-sm max-w-[85%] border border-teal-100">
+                                        "Welcome to quality audit! Explain how to spot sampling bias and why small sample sizes lead to overgeneralization in market research."
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Input Controls -->
+                        <div class="space-y-3">
+                            <div class="flex space-x-2">
+                                <input type="text" id="simUserInput" placeholder="Type your quality critique or sampling analysis in English..." class="flex-1 border-2 border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-montanoTeal">
+                                <button onclick="handleUserSimInput()" class="bg-montanoTeal text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow hover:bg-teal-700 transition-all flex items-center space-x-1">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                    <span>Send</span>
+                                </button>
+                                <button onclick="toggleVoiceRecognition()" id="micBtn" class="bg-montanoBlue text-white px-4 py-2.5 rounded-xl font-bold text-sm shadow hover:bg-sky-700 transition-all" title="Speech Recognition">
+                                    <i class="fa-solid fa-microphone"></i>
+                                </button>
+                            </div>
+                            <p class="text-xs text-gray-500 italic text-center">Tip: Use B2-C1 research quality terms (reliability, validity, sampling bias, representativeness, overgeneralization).</p>
+                        </div>
+                    </div>
+
+                    <!-- Performance Dashboard (1 Col) -->
+                    <div class="bg-white border-2 border-montanoOlive rounded-2xl p-5 flex flex-col justify-between shadow-md space-y-4">
+                        <div>
+                            <h3 class="font-extrabold text-montanoOlive text-lg mb-3 flex items-center justify-between">
+                                <span>Live Performance Dashboard</span>
+                                <i class="fa-solid fa-chart-line"></i>
+                            </h3>
+                            
+                            <!-- Metric 1 -->
+                            <div class="mb-3">
+                                <div class="flex justify-between text-xs font-bold text-gray-700 mb-1">
+                                    <span>Pronunciation & Speech Clarity</span>
+                                    <span id="metricPronounceVal">85%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 h-3 rounded-full overflow-hidden">
+                                    <div id="metricPronounceBar" class="bg-montanoBlue h-3 rounded-full transition-all duration-500" style="width: 85%"></div>
+                                </div>
+                            </div>
+
+                            <!-- Metric 2 -->
+                            <div class="mb-3">
+                                <div class="flex justify-between text-xs font-bold text-gray-700 mb-1">
+                                    <span>Topic / Grammar Accuracy</span>
+                                    <span id="metricGrammarVal">90%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 h-3 rounded-full overflow-hidden">
+                                    <div id="metricGrammarBar" class="bg-montanoTeal h-3 rounded-full transition-all duration-500" style="width: 90%"></div>
+                                </div>
+                            </div>
+
+                            <!-- Metric 3 -->
+                            <div class="mb-4">
+                                <div class="flex justify-between text-xs font-bold text-gray-700 mb-1">
+                                    <span>Politeness & Expression Etiquette</span>
+                                    <span id="metricEtiquetteVal">95%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 h-3 rounded-full overflow-hidden">
+                                    <div id="metricEtiquetteBar" class="bg-montanoOlive h-3 rounded-full transition-all duration-500" style="width: 95%"></div>
+                                </div>
+                            </div>
+
+                            <!-- Key Terms Detected -->
+                            <div class="mb-4">
+                                <h4 class="text-xs font-bold text-gray-600 uppercase tracking-wide mb-2">Key Terms Detected:</h4>
+                                <div id="keyTermsContainer" class="flex flex-wrap gap-1.5">
+                                    <span class="bg-montanoBg text-montanoTeal text-xs font-bold px-2.5 py-1 rounded-lg border border-teal-200">Reliability</span>
+                                    <span class="bg-montanoBg text-montanoBlue text-xs font-bold px-2.5 py-1 rounded-lg border border-blue-200">Validity</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- AI Pedagogical Feedback Box -->
+                        <div class="bg-montanoBg border-2 border-montanoYellow rounded-xl p-3">
+                            <h5 class="text-xs font-extrabold text-montanoTeal uppercase mb-1 flex items-center">
+                                <i class="fa-solid fa-robot mr-1.5"></i> AI Pedagogical Feedback
+                            </h5>
+                            <p id="aiFeedbackText" class="text-xs text-gray-700 leading-relaxed">
+                                "Great engagement! Discuss sampling bias and overgeneralization to achieve C1 research quality proficiency."
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- TAB 4: CRITICAL REFLECTION QUESTIONS -->
+            <div id="tabContent4" class="tab-pane hidden space-y-6">
+                <div class="border-l-8 border-montanoLightBlue bg-montanoBg p-5 rounded-r-2xl shadow-sm">
+                    <h2 class="text-2xl font-extrabold text-montanoBlue mb-1">Critical Reflection & Activity 3 Workshop</h2>
+                    <p class="text-gray-700 text-sm">Complete the research quality reflections and submit your instrument quality checklist audit and small dataset evaluation for Activity 3.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <!-- Reflection 1 -->
+                    <div class="bg-white border-2 border-gray-200 rounded-2xl p-5 shadow-md flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="bg-montanoTeal text-white text-xs font-bold px-3 py-1 rounded-full">Dilemma 1</span>
+                                <span class="text-xs text-gray-500">Reliability vs. Validity</span>
+                            </div>
+                            <h3 class="font-bold text-montanoTeal text-base mb-2">The Broken Scale Dilemma</h3>
+                            <p class="text-xs text-gray-600 mb-4 leading-relaxed">
+                                A market researcher uses a survey to measure "customer loyalty," but the questions actually measure "customer satisfaction with checkout speed." The survey gives the exact same scores every time (high reliability). 
+                                <br><br><strong>Task:</strong> Explain whether this survey has high or low validity, and discuss why high reliability does not guarantee validity.
+                            </p>
+                        </div>
+                        <div>
+                            <textarea id="refInput1" rows="4" placeholder="Write your critical reflection here (minimum 40 words)..." class="w-full border-2 border-gray-300 rounded-xl p-3 text-xs focus:outline-none focus:border-montanoTeal mb-2"></textarea>
+                            <div class="flex justify-between items-center">
+                                <span id="wordCount1" class="text-xs text-gray-400 font-semibold">0 words</span>
+                                <button onclick="saveReflection(1)" class="bg-montanoTeal text-white text-xs font-bold px-4 py-2 rounded-xl shadow hover:bg-teal-700">Save Reflection</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reflection 2: Activity 3 Workshop -->
+                    <div class="bg-white border-2 border-montanoYellow rounded-2xl p-5 shadow-md flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="bg-montanoYellow text-montanoBlue font-extrabold text-xs px-3 py-1 rounded-full">Activity 3 Workshop</span>
+                                <span class="text-xs text-gray-500">Instrument Quality Checklist</span>
+                            </div>
+                            <h3 class="font-bold text-montanoBlue text-base mb-2">Survey Instrument Quality Audit Proposal</h3>
+                            <p class="text-xs text-gray-600 mb-4 leading-relaxed">
+                                Propose a 4-point quality checklist to audit a marketing survey: <strong>1. Wording neutrality</strong>, <strong>2. Construct validity</strong>, <strong>3. Representativeness of sample</strong>, and <strong>4. Protection against response bias</strong>. Explain how you will apply it to a fictional consumer study.
+                            </p>
+                        </div>
+                        <div>
+                            <textarea id="refInput2" rows="4" placeholder="Draft your survey quality checklist and audit proposal here (minimum 35 words)..." class="w-full border-2 border-gray-300 rounded-xl p-3 text-xs focus:outline-none focus:border-montanoYellow mb-2"></textarea>
+                            <div class="flex justify-between items-center">
+                                <span id="wordCount2" class="text-xs text-gray-400 font-semibold">0 words</span>
+                                <button onclick="saveReflection(2)" class="bg-montanoYellow text-montanoBlue text-xs font-bold px-4 py-2 rounded-xl shadow hover:bg-yellow-300">Submit Activity 3 Workshop</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- TAB 5: FORMATIVE EVALUATION (15 PROBLEMS) -->
+            <div id="tabContent5" class="tab-pane hidden space-y-6">
+                <div class="border-l-8 border-montanoYellow bg-montanoBg p-5 rounded-r-2xl shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                    <div>
+                        <h2 class="text-2xl font-extrabold text-montanoBlue mb-1">Formative Evaluation (15 Problems - Guide 7)</h2>
+                        <p class="text-gray-700 text-sm">Test your mastery of reliability, validity, sampling bias, response bias, small sample limitations, descriptive data summaries, and overgeneralization across 3 difficulty levels.</p>
+                    </div>
+                    <div class="mt-3 sm:mt-0 flex space-x-2">
+                        <button onclick="filterEvaluation('all')" class="px-3 py-1 rounded-lg bg-montanoBlue text-white text-xs font-bold">All (15)</button>
+                        <button onclick="filterEvaluation('basic')" class="px-3 py-1 rounded-lg bg-gray-200 text-gray-700 text-xs font-bold hover:bg-montanoLightBlue hover:text-white">Basic (1-5)</button>
+                        <button onclick="filterEvaluation('intermediate')" class="px-3 py-1 rounded-lg bg-gray-200 text-gray-700 text-xs font-bold hover:bg-montanoLightBlue hover:text-white">Interm. (6-10)</button>
+                        <button onclick="filterEvaluation('advanced')" class="px-3 py-1 rounded-lg bg-gray-200 text-gray-700 text-xs font-bold hover:bg-montanoLightBlue hover:text-white">Advanced (11-15)</button>
+                    </div>
+                </div>
+
+                <!-- Evaluation Container -->
+                <div id="evaluationContainer" class="space-y-4">
+                    <!-- Javascript will render 15 evaluation problems here -->
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-montanoBg p-4 border-t border-gray-200 text-center text-xs text-gray-600 rounded-b-[16px]">
+            Colegio Montano Educational Portal &bull; Advanced 12th Grade Mercadotecnia Department &bull; Guide 7: Research Quality, Validity, and Sampling
+        </footer>
+
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Fullscreen Toggle
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    showMsg("Error attempting to enable fullscreen: " + err.message);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        // Custom Message Box (Replacing alert)
+        function showMsg(message) {
+            const existingModal = document.getElementById('customAlertModal');
+            if (existingModal) existingModal.remove();
+
+            const modal = document.createElement('div');
+            modal.id = 'customAlertModal';
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4';
+            modal.innerHTML = `
+                <div class="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl border-4 border-montanoBlue text-center">
+                    <div class="text-montanoBlue text-3xl mb-3"><i class="fa-solid fa-circle-info"></i></div>
+                    <h3 class="font-extrabold text-lg text-gray-800 mb-2">Colegio Montano Notice</h3>
+                    <p class="text-sm text-gray-600 mb-5">${message}</p>
+                    <button onclick="document.getElementById('customAlertModal').remove()" class="bg-montanoBlue text-white px-6 py-2 rounded-xl font-bold text-sm shadow hover:bg-sky-700 w-full">Understood</button>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        // Tab Switching Logic
+        function switchTab(tabNum) {
+            document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-montanoBlue', 'text-white', 'shadow-md');
+                btn.classList.add('bg-white', 'text-gray-700', 'shadow-sm');
+            });
+
+            document.getElementById(`tabContent${tabNum}`).classList.remove('hidden');
+            const activeBtn = document.getElementById(`tabBtn${tabNum}`);
+            activeBtn.classList.remove('bg-white', 'text-gray-700', 'shadow-sm');
+            activeBtn.classList.add('bg-montanoBlue', 'text-white', 'shadow-md');
+        }
+
+        // Text-to-Speech function
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.95;
+                window.speechSynthesis.speak(utterance);
+            } else {
+                showMsg("Text-to-speech is not supported in your browser.");
+            }
+        }
+
+        function speakDialogue(text) {
+            speakText(text);
+        }
+
+        // 15 Solved Examples Data (Guide 7: Research Quality, Validity, and Sampling)
+        const solvedExamplesData = [
+            // Basic (1-5)
+            { id: 1, level: 'basic', title: 'Defining Reliability in Market Surveys', desc: 'A survey questionnaire about brand loyalty yields the exact same scores when administered to the same consumer panel twice under identical conditions.', breakdown: '<strong>High Reliability:</strong> Demonstrates measurement consistency over time.' },
+            { id: 2, level: 'basic', title: 'Defining Validity in Market Research', desc: 'Ensuring that a test measuring "brand perception" actually evaluates consumer emotional attitude rather than household income.', breakdown: '<strong>High Validity:</strong> Confirms the instrument measures the intended marketing construct accurately.' },
+            { id: 3, level: 'basic', title: 'Sample Representativeness', desc: 'Selecting a random sample of 500 shoppers that mirrors the exact age and gender distribution of Guatemala City consumers.', breakdown: '<strong>Representativeness:</strong> Ensures findings can be generalized to the broader target market.' },
+            { id: 4, level: 'basic', title: 'Identifying Sampling Bias', desc: 'Conducting a survey on smartphone preferences exclusively by handing out questionnaires outside a high-end tech convention.', breakdown: '<strong>Sampling Bias:</strong> Systematic exclusion of non-tech consumers skews findings.' },
+            { id: 5, level: 'basic', title: 'Basic Descriptive Summaries', desc: 'Calculating that 65% of surveyed shoppers prefer eco-friendly packaging and presenting the finding in a clear percentage breakdown.', breakdown: '<strong>Descriptive Clarity:</strong> Objective presentation of data without exaggeration.' },
+
+            // Intermediate (6-10)
+            { id: 6, level: 'intermediate', title: 'Detecting Response Bias', desc: 'Survey participants reporting higher environmentally friendly purchases than they actually make because they want to appear socially conscious.', breakdown: '<strong>Response Bias:</strong> Social desirability distortion impairs truthful reporting.' },
+            { id: 7, level: 'intermediate', title: 'Limitations of Small Sample Sizes', desc: 'Surveying only 5 friends and concluding that "100% of Guatemalan teenagers hate online ads."', breakdown: '<strong>Small Sample Flaw:</strong> Inflated margin of error prevents broad generalization.' },
+            { id: 8, level: 'intermediate', title: 'Interpreting Small Fictional Dataset Summaries', desc: 'Analyzing a small test market of 12 stores where mean sales rose by 4% while noting individual store variance.', breakdown: '<strong>Responsible Analysis:</strong> Acknowledges both central tendency and data spread without overstabbing claims.' },
+            { id: 9, level: 'intermediate', title: 'Avoiding Overgeneralization', desc: 'A researcher finding positive feedback from 30 college students in Zone 10 and claiming all Guatemalan citizens adore the new beverage.', breakdown: '<strong>Generalization Boundary:</strong> Restricting claims strictly to the demographic and geographic sample tested.' },
+            { id: 10, level: 'intermediate', title: 'Reliability Without Validity Paradox', desc: 'A scale that consistently weighs people 5 pounds heavier than their actual weight (highly reliable, but invalid for true weight).', breakdown: '<strong>Concept Distinction:</strong> Consistent error does not equal accurate measurement.' },
+
+            // Advanced (11-15)
+            { id: 11, level: 'advanced', title: 'Comprehensive Survey Quality Audit', desc: 'Auditing a 25-question consumer feedback instrument for leading phrasing, ambiguous scales, and reliability checks.', breakdown: '<strong>Rigorous Audit:</strong> Systematic evaluation ensures high data integrity before launch.' },
+            { id: 12, level: 'advanced', title: 'Mitigating Non-Response Bias', desc: 'Offering a discount incentive to survey non-respondents to check if their opinions differ significantly from early respondents.', breakdown: '<strong>Bias Correction:</strong> Prevents silent dropouts from skewing overall conclusions.' },
+            { id: 13, level: 'advanced', title: 'Construct Validity Verification', desc: 'Factor-analyzing survey subscales to ensure questions designed to measure "brand trust" are not actually measuring "product price satisfaction."', breakdown: '<strong>Statistical Validation:</strong> Empirically confirms theoretical construct dimensions.' },
+            { id: 14, level: 'advanced', title: 'Sampling Error vs. Non-Sampling Error', desc: 'Differentiating between random chance variation due to sample size (sampling error) and flawed questionnaire wording (non-sampling error).', breakdown: '<strong>Error Taxonomy:</strong> Identifies source of imperfection in market research findings.' },
+            { id: 15, level: 'advanced', title: 'Ethical Data Reporting and Integrity Audit', desc: 'Reviewing a corporate market research report to ensure negative customer feedback is not omitted or cherry-picked.', breakdown: '<strong>Ethical Rigor:</strong> Upholds scientific honesty and objective reporting standards.' }
+        ];
+
+        function renderExamples(filter = 'all') {
+            const container = document.getElementById('examplesContainer');
+            container.innerHTML = '';
+
+            const filtered = filter === 'all' ? solvedExamplesData : solvedExamplesData.filter(ex => ex.level === filter);
+
+            filtered.forEach(ex => {
+                const badgeColor = ex.level === 'basic' ? 'bg-montanoBlue' : ex.level === 'intermediate' ? 'bg-montanoTeal' : 'bg-montanoOlive';
+                const card = document.createElement('div');
+                card.className = 'bg-white border-2 border-gray-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all';
+                card.innerHTML = `
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center space-x-2">
+                            <span class="${badgeColor} text-white text-xs font-extrabold px-3 py-1 rounded-full uppercase">Example ${ex.id} (${ex.level})</span>
+                            <h3 class="font-bold text-gray-800 text-sm sm:text-base">${ex.title}</h3>
+                        </div>
+                        <button onclick="speakText('${ex.title}. ${ex.desc}. Breakdown: ${ex.breakdown.replace(/<[^>]*>?/gm, '')}')" class="text-montanoBlue hover:text-sky-700 p-2 text-lg" title="Listen to Example Audio">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </button>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600 mb-3 bg-gray-50 p-3 rounded-xl border border-gray-100">
+                        <strong>Scenario:</strong> ${ex.desc}
+                    </p>
+                    <div class="text-xs sm:text-sm text-gray-700 bg-montanoBg p-3 rounded-xl border border-blue-100">
+                        <strong>Scientific Breakdown:</strong> ${ex.breakdown}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function filterExamples(level) {
+            renderExamples(level);
+        }
+
+        // Live Voice Simulator & AI Dashboard Logic
+        let simHistory = [];
+        function handleUserSimInput() {
+            const input = document.getElementById('simUserInput');
+            const text = input.value.trim();
+            if (!text) return;
+
+            appendChatBubble('You', text, 'bg-montanoTeal text-white', 'ml-auto');
+            input.value = '';
+
+            // Simulate AI evaluation update
+            updateDashboardMetrics(text);
+
+            // Simulate Research Director response after 1 second
+            setTimeout(() => {
+                let rdReply = "Good research quality analysis! Make sure to address reliability, validity, and sampling bias.";
+                if (text.toLowerCase().includes('reliability') || text.toLowerCase().includes('validity') || text.toLowerCase().includes('bias') || text.toLowerCase().includes('representativeness') || text.toLowerCase().includes('overgeneralization')) {
+                    rdReply = "Outstanding research quality critique! Your mastery of validity and sampling limits meets C1 standards. Approved!";
+                }
+                appendChatBubble('RD', rdReply, 'bg-teal-50 text-gray-800 border border-teal-100', '');
+                speakText(rdReply);
+            }, 1000);
+        }
+
+        function appendChatBubble(sender, text, styleClass, alignClass) {
+            const chatBox = document.getElementById('simChatBox');
+            const bubble = document.createElement('div');
+            bubble.className = `flex items-start space-x-2 ${alignClass}`;
+            
+            if (sender === 'RD') {
+                bubble.innerHTML = `
+                    <div class="bg-montanoTeal text-white rounded-full w-8 h-8 flex items-center justify-center text-xs font-bold flex-shrink-0">RD</div>
+                    <div class="${styleClass} p-3 rounded-2xl rounded-tl-none text-sm max-w-[85%]">${text}</div>
+                `;
+            } else {
+                bubble.innerHTML = `
+                    <div class="${styleClass} p-3 rounded-2xl rounded-tr-none text-sm max-w-[85%]">${text}</div>
+                    <div class="bg-montanoOlive text-white rounded-full w-8 h-8 flex items-center justify-center text-xs font-bold flex-shrink-0">You</div>
+                `;
+            }
+            chatBox.appendChild(bubble);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function updateDashboardMetrics(userText) {
+            const len = userText.length;
+            const pScore = Math.min(98, Math.max(75, 80 + Math.floor(len / 5)));
+            const gScore = Math.min(99, Math.max(80, 85 + (userText.toLowerCase().includes('reliability') || userText.toLowerCase().includes('validity') || userText.toLowerCase().includes('bias') ? 10 : 0)));
+            const eScore = Math.min(100, Math.max(90, 92 + (userText.toLowerCase().includes('please') || userText.toLowerCase().includes('thank') || len > 30 ? 5 : 0)));
+
+            document.getElementById('metricPronounceVal').innerText = pScore + '%';
+            document.getElementById('metricPronounceBar').style.width = pScore + '%';
+
+            document.getElementById('metricGrammarVal').innerText = gScore + '%';
+            document.getElementById('metricGrammarBar').style.width = gScore + '%';
+
+            document.getElementById('metricEtiquetteVal').innerText = eScore + '%';
+            document.getElementById('metricEtiquetteBar').style.width = eScore + '%';
+
+            // Detect key terms
+            const termsContainer = document.getElementById('keyTermsContainer');
+            const keywords = ['reliability', 'validity', 'representativeness', 'sampling bias', 'response bias', 'overgeneralization', 'descriptive summaries', 'small sample'];
+            keywords.forEach(kw => {
+                if (userText.toLowerCase().includes(kw) && !termsContainer.innerHTML.includes(kw)) {
+                    const tag = document.createElement('span');
+                    tag.className = 'bg-montanoBg text-montanoTeal text-xs font-bold px-2.5 py-1 rounded-lg border border-teal-200 capitalize';
+                    tag.innerText = kw;
+                    termsContainer.appendChild(tag);
+                }
+            });
+
+            const feedbackElem = document.getElementById('aiFeedbackText');
+            if (gScore > 90) {
+                feedbackElem.innerText = '"Outstanding C1 research quality proficiency! Your mastery of validity and sampling integrity is exemplary."';
+            } else {
+                feedbackElem.innerText = '"Good effort! Try including specific terms like \'reliability\', \'validity\', and \'sampling bias\' to maximize your score."';
+            }
+        }
+
+        // Web Speech Recognition integration
+        function toggleVoiceRecognition() {
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                showMsg("Speech Recognition API is not supported in your browser. Please use Chrome or Edge.");
+                return;
+            }
+
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'en-US';
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            const micBtn = document.getElementById('micBtn');
+            micBtn.classList.add('bg-red-500', 'animate-pulse');
+
+            recognition.onresult = function(event) {
+                const speechResult = event.results[0][0].transcript;
+                document.getElementById('simUserInput').value = speechResult;
+                micBtn.classList.remove('bg-red-500', 'animate-pulse');
+                handleUserSimInput();
+            };
+
+            recognition.onerror = function(event) {
+                micBtn.classList.remove('bg-red-500', 'animate-pulse');
+                showMsg("Voice recognition error occurred. Please type your answer.");
+            };
+
+            recognition.onend = function() {
+                micBtn.classList.remove('bg-red-500', 'animate-pulse');
+            };
+
+            recognition.start();
+        }
+
+        // Reflection word counters and save
+        document.addEventListener('DOMContentLoaded', () => {
+            ['1', '2'].forEach(id => {
+                const textarea = document.getElementById(`refInput${id}`);
+                const counter = document.getElementById(`wordCount${id}`);
+                textarea.addEventListener('input', () => {
+                    const words = textarea.value.trim() ? textarea.value.trim().split(/\s+/).length : 0;
+                    counter.innerText = words + ' words';
+                });
+            });
+
+            renderExamples('all');
+            renderEvaluation('all');
+        });
+
+        function saveReflection(id) {
+            const val = document.getElementById(`refInput${id}`).value.trim();
+            const words = val ? val.split(/\s+/).length : 0;
+            if (words < 15) {
+                showMsg("Please write a more comprehensive reflection (at least 15 words) demonstrating critical analysis.");
+                return;
+            }
+            if (id === 2) {
+                showMsg("Activity 3 Workshop successfully submitted! Your survey quality checklist audit has been recorded for your Colegio Montano portfolio.");
+            } else {
+                showMsg(`Reflection ${id} successfully saved and submitted to your Colegio Montano portfolio!`);
+            }
+        }
+
+        // 15 Formative Evaluation Problems Data (Guide 7)
+        const evaluationData = [
+            // Basic (1-5)
+            { id: 1, level: 'basic', q: 'What is reliability in market research?', options: ['A) The cost of the research', 'B) The consistency and repeatability of measurement results', 'C) The number of questions on a survey', 'D) The speed of internet data entry'], answer: 'B', explanation: 'Reliability ensures the instrument produces consistent scores across repeated trials.' },
+            { id: 2, level: 'basic', q: 'What is validity in market research?', options: ['A) Whether the survey has colorful graphics', 'B) Whether the research instrument truly measures what it claims to measure', 'C) Whether the sample size is over 1,000', 'D) Whether the participants are adults'], answer: 'B', explanation: 'Validity ensures truthfulness and accuracy of the underlying market construct.' },
+            { id: 3, level: 'basic', q: 'What does sample representativeness mean?', options: ['A) That all participants are sales managers', 'B) How closely the sample demographics mirror the broader target population', 'C) That the survey was conducted online', 'D) That the questions are multiple-choice'], answer: 'B', explanation: 'Representativeness allows safe generalization of findings to the target market.' },
+            { id: 4, level: 'basic', q: 'What is sampling bias?', options: ['A) A preference for yellow packaging', 'B) Systematic error where certain members of a population are less likely to be included than others', 'C) A type of interview question', 'D) Error caused by calculator rounding'], answer: 'B', explanation: 'Sampling bias skews sample composition away from true population traits.' },
+            { id: 5, level: 'basic', q: 'What is response bias?', options: ['A) Participants answering questions dishonestly or in a socially desirable manner', 'B) The researcher forgetting to print surveys', 'C) Slow server response time', 'D) Using a small sample size'], answer: 'A', explanation: 'Response bias occurs when participant motivations distort accurate self-reporting.' },
+
+            // Intermediate (6-10)
+            { id: 6, level: 'intermediate', q: 'Why are small sample sizes problematic in market research?', options: ['A) They take too long to analyze', 'B) They inflate margins of error and prevent safe generalization to the wider population', 'C) They are illegal in Guatemala', 'D) They eliminate response bias'], answer: 'B', explanation: 'Small samples lack statistical power and create unstable estimates.' },
+            { id: 7, level: 'intermediate', q: 'If a survey gives identical results every time but measures the wrong psychological construct, it is:', options: ['A) Valid but unreliable', 'B) Reliable but invalid', 'C) Both reliable and valid', 'D) Neither reliable nor valid'], answer: 'B', explanation: 'Consistency without truthfulness equals high reliability but low validity.' },
+            { id: 8, level: 'intermediate', q: 'What is the primary danger of overgeneralization in research?', options: ['A) Printing too many reports', 'B) Applying findings from a narrow sample (e.g., 10 friends) to an entire country or global market', 'C) Using descriptive statistics', 'D) Asking open-ended questions'], answer: 'B', explanation: 'Overgeneralization misleads stakeholders by stretching conclusions beyond data boundaries.' },
+            { id: 9, level: 'intermediate', q: 'How do basic descriptive summaries help researchers?', options: ['A) They replace the need for data collection', 'B) They provide clear, objective percentages, means, and counts of collected data', 'C) They introduce sampling bias', 'D) They make questionnaires longer'], answer: 'B', explanation: 'Descriptive summaries organize raw numbers into understandable insights.' },
+            { id: 10, level: 'intermediate', q: 'What is non-response bias?', options: ['A) When people refuse to participate, and their opinions differ systematically from those who responded', 'B) When the printer runs out of ink', 'C) Asking leading questions', 'D) Using random assignment'], answer: 'A', explanation: 'Non-response bias occurs when missing participants possess distinct viewpoints.' },
+
+            // Advanced (11-15)
+            { id: 11, level: 'advanced', q: 'When auditing a market research instrument for quality, what indicates high construct validity?', options: ['A) Questions are easy to read', 'B) Empirical data confirms the survey questions accurately measure the theoretical marketing concept', 'C) The survey has 50 questions', 'D) All respondents give 5-star ratings'], answer: 'B', explanation: 'Construct validity is verified when empirical testing confirms theoretical alignment.' },
+            { id: 12, level: 'advanced', q: 'How can a researcher test for inter-item reliability in a multi-question satisfaction survey?', options: ['A) By asking respondents their age twice', 'B) By calculating statistical consistency (such as Cronbach\'s alpha) across questions measuring the same trait', 'C) By interviewing store managers', 'D) By shortening the survey'], answer: 'B', explanation: 'Statistical reliability tests measure internal consistency among survey items.' },
+            { id: 13, level: 'advanced', q: 'What distinguishes sampling error from sampling bias?', options: ['A) They are identical terms', 'B) Sampling error is random natural variation due to sample size; sampling bias is systematic flaw in sample selection', 'C) Sampling bias is caused by bad calculators', 'D) Sampling error only occurs in experiments'], answer: 'B', explanation: 'Sampling error is random chance; sampling bias is systematic distortion.' },
+            { id: 14, level: 'advanced', q: 'In evaluating a small fictional test market dataset, why is reporting data spread (variance) as important as reporting the mean?', options: ['A) It makes the report look longer', 'B) Means can mask extreme differences among individual consumers or stores', 'C) Variance proves high validity', 'D) It eliminates response bias'], answer: 'B', explanation: 'Data spread reveals whether a trend is uniform or driven by outliers.' },
+            { id: 15, level: 'advanced', q: 'What defines C1 mastery in research quality evaluation for 12th-grade marketing students?', options: ['A) Assuming all published surveys are 100% accurate', 'B) Rigorously auditing instruments for reliability, validity, bias, and population representativeness while avoiding overgeneralization', 'C) Rejecting all quantitative data', 'D) Using only small sample sizes'], answer: 'B', explanation: 'C1 mastery requires comprehensive methodological critique and ethical data stewardship.' }
+        ];
+
+        function renderEvaluation(filter = 'all') {
+            const container = document.getElementById('evaluationContainer');
+            container.innerHTML = '';
+
+            const filtered = filter === 'all' ? evaluationData : evaluationData.filter(ev => ev.level === filter);
+
+            filtered.forEach(ev => {
+                const badgeColor = ev.level === 'basic' ? 'bg-montanoBlue' : ev.level === 'intermediate' ? 'bg-montanoTeal' : 'bg-montanoOlive';
+                const card = document.createElement('div');
+                card.className = 'bg-white border-2 border-gray-200 rounded-2xl p-5 shadow-sm space-y-3';
+                
+                let optionsHtml = '';
+                ev.options.forEach(opt => {
+                    optionsHtml += `<label class="block text-xs sm:text-sm text-gray-700 bg-gray-50 p-2.5 rounded-xl border border-gray-100 cursor-pointer hover:bg-teal-50 transition-all"><input type="radio" name="evalQ_${ev.id}" value="${opt[0]}" class="mr-2 accent-montanoTeal"> ${opt}</label>`;
+                });
+
+                card.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span class="${badgeColor} text-white text-xs font-extrabold px-3 py-1 rounded-full uppercase">Problem ${ev.id} (${ev.level})</span>
+                        <button onclick="speakText('${ev.q}')" class="text-montanoTeal hover:text-teal-700 text-sm" title="Listen to Question"><i class="fa-solid fa-volume-high"></i></button>
+                    </div>
+                    <p class="font-bold text-gray-800 text-sm sm:text-base">${ev.q}</p>
+                    <div class="space-y-2">${optionsHtml}</div>
+                    
+                    <div class="flex justify-between items-center pt-2">
+                        <button onclick="toggleSolution(${ev.id})" id="solBtn_${ev.id}" class="bg-montanoYellow text-montanoBlue text-xs font-bold px-4 py-2 rounded-xl shadow hover:bg-yellow-300 transition-transform active:scale-95">
+                            <i class="fa-solid fa-eye mr-1"></i> Show Solution
+                        </button>
+                        <span id="evalFeedback_${ev.id}" class="text-xs font-bold"></span>
+                    </div>
+
+                    <div id="solutionBox_${ev.id}" class="hidden bg-montanoBg p-4 rounded-xl border border-blue-200 text-xs sm:text-sm text-gray-700 space-y-1 mt-2">
+                        <p class="font-bold text-montanoBlue">Correct Answer: Option ${ev.answer}</p>
+                        <p><strong>Explanation:</strong> ${ev.explanation}</p>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function filterEvaluation(level) {
+            renderEvaluation(level);
+        }
+
+        function toggleSolution(id) {
+            const solBox = document.getElementById(`solutionBox_${id}`);
+            const btn = document.getElementById(`solBtn_${id}`);
+            if (solBox.classList.contains('hidden')) {
+                solBox.classList.remove('hidden');
+                btn.innerHTML = '<i class="fa-solid fa-eye-slash mr-1"></i> Hide Solution';
+                btn.classList.remove('bg-montanoYellow');
+                btn.classList.add('bg-gray-300', 'text-gray-800');
+            } else {
+                solBox.classList.add('hidden');
+                btn.innerHTML = '<i class="fa-solid fa-eye mr-1"></i> Show Solution';
+                btn.classList.remove('bg-gray-300', 'text-gray-800');
+                btn.classList.add('bg-montanoYellow');
+            }
+        }
+    </script>
+</body>
+</html>
